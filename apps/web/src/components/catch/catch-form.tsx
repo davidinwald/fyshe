@@ -297,7 +297,7 @@ export function CatchForm({ initialData }: CatchFormProps) {
             <div className="space-y-2">
               <Label>Gear Used</Label>
               <div className="grid gap-2 sm:grid-cols-2">
-                {gearItems.map((gear) => (
+                {gearItems.map((gear: { id: string; name: string; category: string; brand: string | null }) => (
                   <label
                     key={gear.id}
                     className={`flex items-center gap-2 rounded-md border p-3 cursor-pointer transition-colors ${
