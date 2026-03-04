@@ -1,5 +1,9 @@
 import withSerwistInit from "@serwist/next";
 import type { NextConfig } from "next";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const withSerwist = withSerwistInit({
   swSrc: "src/sw.ts",
@@ -8,7 +12,8 @@ const withSerwist = withSerwistInit({
 });
 
 const nextConfig: NextConfig = {
-  output: process.env.STANDALONE === "true" ? "standalone" : undefined,
+  output: process.env.VERCEL ? "standalone" : undefined,
+  outputFileTracingRoot: path.join(__dirname, "../../"),
   transpilePackages: ["@fyshe/api", "@fyshe/auth", "@fyshe/db", "@fyshe/ui", "@fyshe/validators"],
 };
 
