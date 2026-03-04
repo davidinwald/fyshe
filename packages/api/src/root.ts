@@ -1,4 +1,5 @@
 import { createTRPCRouter } from "./trpc";
+import { authRouter } from "./routers/auth";
 import { healthRouter } from "./routers/health";
 import { userRouter } from "./routers/user";
 import { gearRouter } from "./routers/gear";
@@ -12,6 +13,7 @@ import { articleRouter } from "./routers/article";
 import { feedRouter } from "./routers/feed";
 
 export const appRouter = createTRPCRouter({
+  auth: authRouter,
   health: healthRouter,
   user: userRouter,
   gear: gearRouter,

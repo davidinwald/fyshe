@@ -5,44 +5,47 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { Button, Input, Label, Card, CardContent, CardHeader, CardTitle } from "@fyshe/ui";
+import { trpc } from "@/trpc/client";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  const register = trpc.auth.register.useMutation({
+    onSuccess: async () => {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      if (res?.ok) {
+        router.push("/dashboard");
+      }
+    },
+    onError: (err) => {
+      setError(err.message);
+    },
+  });
+
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    setLoading(true);
-
-    const res = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
-
-    setLoading(false);
-
-    if (res?.error) {
-      setError("Invalid email or password");
-    } else if (res?.ok) {
-      router.push("/dashboard");
-    }
+    register.mutate({ name, email, password });
   }
 
   return (
     <div className="space-y-6">
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold">Welcome to Fyshe</h1>
-        <p className="text-muted-foreground">Sign in to start tracking your fishing.</p>
+        <h1 className="text-3xl font-bold">Create Account</h1>
+        <p className="text-muted-foreground">Start tracking your fishing journey.</p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Sign in with email</CardTitle>
+          <CardTitle>Sign up with email</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -51,6 +54,16 @@ export default function LoginPage() {
                 {error}
               </p>
             )}
+            <div className="space-y-2">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name"
+                required
+              />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -69,12 +82,13 @@ export default function LoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Your password"
+                placeholder="At least 8 characters"
+                minLength={8}
                 required
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Signing in..." : "Sign In"}
+            <Button type="submit" className="w-full" disabled={register.isPending}>
+              {register.isPending ? "Creating account..." : "Create Account"}
             </Button>
           </form>
         </CardContent>
@@ -100,9 +114,9 @@ export default function LoginPage() {
       </div>
 
       <p className="text-center text-sm text-muted-foreground">
-        Don&apos;t have an account?{" "}
-        <Link href="/register" className="text-primary hover:underline">
-          Create one
+        Already have an account?{" "}
+        <Link href="/login" className="text-primary hover:underline">
+          Sign in
         </Link>
       </p>
     </div>
