@@ -1,0 +1,26 @@
+{
+  "name": "@fyshe/auth",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "next-auth": "5.0.0-beta.30",
+    "@auth/prisma-adapter": "^2.8.0",
+    "@fyshe/db": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@fyshe/config": "workspace:*",
+    "next": "^15.2.0"
+  }
+}

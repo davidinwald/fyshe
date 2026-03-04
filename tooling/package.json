@@ -1,0 +1,14 @@
+{
+  "name": "@fyshe/tooling",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "roadmap:sync": "tsx scripts/roadmap-sync.ts",
+    "roadmap:sync:commit": "tsx scripts/roadmap-sync.ts commit"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

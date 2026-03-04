@@ -1,0 +1,4 @@
+{
+  "extends": "@fyshe/config/typescript/base.json",
+  "include": ["scripts/**/*.ts"]
+}

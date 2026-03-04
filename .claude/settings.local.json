@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git config:*)",
+      "Bash(node:*)",
+      "Bash(pnpm:*)",
+      "Bash(npx:*)"
+    ]
+  }
+}

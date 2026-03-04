@@ -1,0 +1,29 @@
+{
+  "name": "@fyshe/api",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@trpc/server": "^11.11.0",
+    "next-auth": "5.0.0-beta.30",
+    "superjson": "^2.2.0",
+    "zod": "^3.24.0",
+    "@fyshe/db": "workspace:*",
+    "@fyshe/auth": "workspace:*",
+    "@fyshe/validators": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@fyshe/config": "workspace:*"
+  }
+}

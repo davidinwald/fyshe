@@ -1,0 +1,53 @@
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  bio           String?   @db.Text
+  location      String?
+  isPublic      Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Auth relations
+  accounts Account[]
+  sessions Session[]
+
+  // Preferences
+  preferences UserPreferences?
+
+  @@index([email])
+}
+
+model UserPreferences {
+  id                String          @id @default(cuid())
+  userId            String          @unique
+  preferredSpecies  String[]
+  preferredMethods  FishingMethod[]
+  unitSystem        UnitSystem      @default(IMPERIAL)
+  defaultVisibility Visibility      @default(PRIVATE)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum FishingMethod {
+  FLY
+  SPIN
+  BAIT
+  TROLLING
+  ICE
+  SURF
+  OTHER
+}
+
+enum UnitSystem {
+  IMPERIAL
+  METRIC
+}
+
+enum Visibility {
+  PUBLIC
+  PRIVATE
+  FOLLOWERS_ONLY
+}
