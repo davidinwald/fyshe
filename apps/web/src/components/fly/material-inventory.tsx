@@ -121,7 +121,7 @@ export function MaterialInventory({ initialItems }: { initialItems: MaterialItem
   const categories = Object.keys(grouped).sort();
 
   // Get unique categories from all items for the filter dropdown
-  const allCategories = Array.from(
+  const allCategories: string[] = Array.from(
     new Set(displayItems.map((item: MaterialItem) => item.category)),
   ).sort();
 
