@@ -6,7 +6,10 @@ import Google from "next-auth/providers/google";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(db),
-  providers: [GitHub, Google],
+  providers: [
+    GitHub,
+    ...(process.env.AUTH_GOOGLE_ID ? [Google] : []),
+  ],
   pages: {
     signIn: "/login",
   },
