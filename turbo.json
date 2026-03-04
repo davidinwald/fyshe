@@ -5,7 +5,10 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**", "node_modules/.prisma/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "@fyshe/db#build": {
+      "cache": false
     },
     "lint": {
       "dependsOn": ["^build"]
