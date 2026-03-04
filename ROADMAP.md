@@ -88,8 +88,10 @@
 - [x] PWA manifest and icons (192px, 512px, maskable)
 - [x] Install prompt UI (deferred prompt banner)
 - [x] Offline fallback page (/offline)
-- [ ] Performance audit (Lighthouse)
-- [ ] Accessibility audit
+- [ ] Performance audit (Lighthouse — requires running app)
+- [x] Accessibility improvements (aria-labels, aria-pressed, lang, apple-web-app meta)
 - [x] Loading states and skeleton screens (catches, gear, trips, flies)
 - [x] Error boundaries on all route segments (app + public)
-- [ ] README with screenshots and demo link
+- [x] Not-found pages for all detail routes
+- [x] README with project documentation
+- [ ] README screenshots (requires running app)

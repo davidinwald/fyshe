@@ -59,6 +59,8 @@ export function LikeButton({
       onClick={() => toggleLike.mutate(target)}
       disabled={toggleLike.isPending}
       className="gap-1.5"
+      aria-label={displayLiked ? `Unlike (${displayCount} likes)` : `Like (${displayCount} likes)`}
+      aria-pressed={displayLiked}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

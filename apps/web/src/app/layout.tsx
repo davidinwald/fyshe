@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   title: "Fyshe — Fishing Companion",
   description: "Track your catches, plan trips, and discover fly patterns.",
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Fyshe",
+  },
 };
 
 export const viewport: Viewport = {

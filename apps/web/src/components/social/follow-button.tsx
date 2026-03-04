@@ -69,6 +69,7 @@ export function FollowButton({ userId, initialFollowing }: FollowButtonProps) {
       size="sm"
       onClick={handleClick}
       disabled={isPending}
+      aria-pressed={displayFollowing}
     >
       {isPending
         ? "..."
