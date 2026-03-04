@@ -72,7 +72,7 @@ export function MyArticles({ initialArticles }: MyArticlesProps) {
 
   return (
     <div className="space-y-3">
-      {articles.map((article) => (
+      {articles.map((article: Article) => (
         <Card key={article.id}>
           <CardContent className="flex items-center justify-between p-4 gap-4">
             <div className="min-w-0 flex-1 space-y-1">

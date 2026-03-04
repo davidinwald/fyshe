@@ -168,7 +168,7 @@ export function BaitRecommendations() {
 
       {results.length > 0 && (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {results.map((rec) => (
+          {results.map((rec: RecommendedBait) => (
             <Link key={rec.id} href={`/flies/bait/${rec.id}`}>
               <Card className="hover:border-primary/50 transition-colors cursor-pointer h-full">
                 <CardContent className="p-4 space-y-3">

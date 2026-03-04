@@ -120,7 +120,7 @@ export function TripList({ initialItems }: TripListProps) {
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {displayTrips.map((trip) => (
+          {displayTrips.map((trip: Trip) => (
             <a key={trip.id} href={`/trips/${trip.id}`} className="block">
               <Card className="hover:border-primary/50 h-full transition-colors">
                 <CardHeader className="pb-2">

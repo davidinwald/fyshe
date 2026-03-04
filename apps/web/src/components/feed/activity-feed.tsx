@@ -107,7 +107,7 @@ export function ActivityFeed() {
 
   return (
     <div className="space-y-2">
-      {items.map((item) => {
+      {items.map((item: ActivityItem) => {
         const action = getActionText(item);
         return (
           <Link key={item.id} href={action.href}>

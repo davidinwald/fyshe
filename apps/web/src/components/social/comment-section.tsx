@@ -155,7 +155,7 @@ function CommentItem({
 
       {comment.replies && comment.replies.length > 0 && (
         <div className="mt-3 space-y-3">
-          {comment.replies.map((reply) => (
+          {comment.replies.map((reply: Comment) => (
             <CommentItem
               key={reply.id}
               comment={reply}
@@ -253,7 +253,7 @@ export function CommentSection({
         </p>
       ) : (
         <div className="space-y-4">
-          {threadedComments.map((comment) => (
+          {threadedComments.map((comment: Comment) => (
             <CommentItem
               key={comment.id}
               comment={comment}

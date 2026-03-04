@@ -178,7 +178,7 @@ export function CatchDetail({ item }: CatchDetailProps) {
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-2">Gear Used</p>
               <div className="flex flex-wrap gap-2">
-                {item.gear.map((g) => (
+                {item.gear.map((g: { gear: { id: string; name: string; category: string; brand: string | null; model: string | null } }) => (
                   <a key={g.gear.id} href={`/gear/${g.gear.id}`}>
                     <Badge variant="secondary" className="cursor-pointer hover:bg-secondary/80">
                       {g.gear.name}

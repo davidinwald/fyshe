@@ -223,7 +223,7 @@ export function TripDetail({ trip }: TripDetailProps) {
                 </p>
               ) : (
                 <div className="grid gap-3 sm:grid-cols-2">
-                  {trip.catches.map((c) => (
+                  {trip.catches.map((c: TripCatch) => (
                     <Card key={c.id}>
                       <CardContent className="p-4">
                         <div className="flex items-start justify-between">
@@ -276,7 +276,7 @@ export function TripDetail({ trip }: TripDetailProps) {
                 </p>
               ) : (
                 <ul className="space-y-3">
-                  {trip.members.map((member) => (
+                  {trip.members.map((member: TripMember) => (
                     <li
                       key={member.id}
                       className="flex items-center justify-between"

@@ -85,7 +85,7 @@ export function CatchStats({ initialData }: { initialData: StatsData }) {
               <p className="text-muted-foreground text-sm">No data yet.</p>
             ) : (
               <div className="space-y-2">
-                {stats.bySpecies.map((row) => (
+                {stats.bySpecies.map((row: { species: string; _count: number }) => (
                   <div
                     key={row.species}
                     className="flex items-center justify-between py-1.5 border-b border-border last:border-0"
@@ -111,7 +111,7 @@ export function CatchStats({ initialData }: { initialData: StatsData }) {
               <p className="text-muted-foreground text-sm">No data yet.</p>
             ) : (
               <div className="space-y-2">
-                {stats.byMethod.map((row) => (
+                {stats.byMethod.map((row: { method: string | null; _count: number }) => (
                   <div
                     key={row.method ?? "unknown"}
                     className="flex items-center justify-between py-1.5 border-b border-border last:border-0"
@@ -144,7 +144,7 @@ export function CatchStats({ initialData }: { initialData: StatsData }) {
             </p>
           ) : (
             <div className="space-y-3">
-              {stats.recentCatches.map((c) => (
+              {stats.recentCatches.map((c: { id: string; species: string; length: unknown; weight: unknown; caughtAt: Date; locationName: string | null }) => (
                 <Link
                   key={c.id}
                   href={`/catches/${c.id}`}

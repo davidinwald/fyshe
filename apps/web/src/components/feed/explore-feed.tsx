@@ -76,7 +76,7 @@ export function ExploreFeed() {
   return (
     <div className="space-y-6">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => (
+        {items.map((item: ExploreCatch) => (
           <Card
             key={item.id}
             className="hover:border-primary/50 transition-colors overflow-hidden"

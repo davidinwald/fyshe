@@ -135,7 +135,7 @@ export function FlyPatternList({ initialItems }: { initialItems: FlyPatternItem[
         </Card>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {displayItems.map((item) => (
+          {displayItems.map((item: FlyPatternItem) => (
             <Link key={item.id} href={`/flies/${item.id}`}>
               <Card className="hover:border-primary/50 transition-colors cursor-pointer h-full">
                 <CardContent className="p-4 space-y-2">
@@ -155,7 +155,7 @@ export function FlyPatternList({ initialItems }: { initialItems: FlyPatternItem[
                   )}
                   {item.targetSpecies.length > 0 && (
                     <div className="flex flex-wrap gap-1">
-                      {item.targetSpecies.map((species) => (
+                      {item.targetSpecies.map((species: string) => (
                         <Badge key={species} variant="outline" className="text-xs">
                           {species}
                         </Badge>
@@ -164,7 +164,7 @@ export function FlyPatternList({ initialItems }: { initialItems: FlyPatternItem[
                   )}
                   {item.seasons.length > 0 && (
                     <div className="flex flex-wrap gap-1">
-                      {item.seasons.map((s) => (
+                      {item.seasons.map((s: string) => (
                         <Badge key={s} variant="outline" className="text-xs">
                           {SEASON_LABELS[s] ?? s}
                         </Badge>

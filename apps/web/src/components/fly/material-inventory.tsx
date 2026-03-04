@@ -122,7 +122,7 @@ export function MaterialInventory({ initialItems }: { initialItems: MaterialItem
 
   // Get unique categories from all items for the filter dropdown
   const allCategories = Array.from(
-    new Set(displayItems.map((item) => item.category)),
+    new Set(displayItems.map((item: MaterialItem) => item.category)),
   ).sort();
 
   return (
@@ -140,7 +140,7 @@ export function MaterialInventory({ initialItems }: { initialItems: MaterialItem
           className="w-44"
         >
           <SelectOption value="">All Categories</SelectOption>
-          {allCategories.map((cat) => (
+          {allCategories.map((cat: string) => (
             <SelectOption key={cat} value={cat}>
               {cat}
             </SelectOption>
@@ -264,7 +264,7 @@ export function MaterialInventory({ initialItems }: { initialItems: MaterialItem
         </Card>
       ) : (
         <div className="space-y-6">
-          {categories.map((cat) => (
+          {categories.map((cat: string) => (
             <Card key={cat}>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">

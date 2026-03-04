@@ -211,7 +211,7 @@ export function FlyPatternDetail({ pattern }: FlyPatternDetailProps) {
                   </tr>
                 </thead>
                 <tbody>
-                  {sortedMaterials.map((mat) => (
+                  {sortedMaterials.map((mat: PatternMaterial) => (
                     <tr key={mat.id} className="border-b last:border-0">
                       <td className="py-2 pr-4 font-medium">{mat.part}</td>
                       <td className="py-2 pr-4">{mat.material}</td>
@@ -232,7 +232,7 @@ export function FlyPatternDetail({ pattern }: FlyPatternDetailProps) {
             <CardTitle>Tying Steps</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {sortedSteps.map((step) => (
+            {sortedSteps.map((step: TyingStep) => (
               <div key={step.id} className="flex gap-4">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">
                   {step.stepNumber}
@@ -260,7 +260,7 @@ export function FlyPatternDetail({ pattern }: FlyPatternDetailProps) {
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-2">Target Species</p>
               <div className="flex flex-wrap gap-2">
-                {pattern.targetSpecies.map((species) => (
+                {pattern.targetSpecies.map((species: string) => (
                   <Badge key={species} variant="secondary">
                     {species}
                   </Badge>
@@ -273,7 +273,7 @@ export function FlyPatternDetail({ pattern }: FlyPatternDetailProps) {
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-2">Seasons</p>
               <div className="flex flex-wrap gap-2">
-                {pattern.seasons.map((s) => (
+                {pattern.seasons.map((s: string) => (
                   <Badge key={s} variant="outline">
                     {SEASON_LABELS[s] ?? s}
                   </Badge>
@@ -286,7 +286,7 @@ export function FlyPatternDetail({ pattern }: FlyPatternDetailProps) {
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-2">Water Types</p>
               <div className="flex flex-wrap gap-2">
-                {pattern.waterTypes.map((wt) => (
+                {pattern.waterTypes.map((wt: string) => (
                   <Badge key={wt} variant="outline">
                     {WATER_TYPE_LABELS[wt] ?? wt}
                   </Badge>
@@ -299,7 +299,7 @@ export function FlyPatternDetail({ pattern }: FlyPatternDetailProps) {
             <div>
               <p className="text-sm font-medium text-muted-foreground mb-2">Regions</p>
               <div className="flex flex-wrap gap-2">
-                {pattern.regions.map((r) => (
+                {pattern.regions.map((r: string) => (
                   <Badge key={r} variant="outline">
                     {r}
                   </Badge>

@@ -88,7 +88,7 @@ export function GearList({ initialItems }: { initialItems: GearItem[] }) {
         </Card>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {displayItems.map((item) => (
+          {displayItems.map((item: GearItem) => (
             <Link key={item.id} href={`/gear/${item.id}`}>
               <Card className="hover:border-primary/50 transition-colors cursor-pointer h-full">
                 <CardContent className="p-4 space-y-2">
