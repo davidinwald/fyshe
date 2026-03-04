@@ -1,0 +1,56 @@
+model Catch {
+  id          String         @id @default(cuid())
+  userId      String
+  tripId      String?
+  species     String
+  length      Decimal?       @db.Decimal(8, 2)
+  weight      Decimal?       @db.Decimal(8, 2)
+  method      FishingMethod?
+  locationName String?
+  latitude    Decimal?       @db.Decimal(10, 7)
+  longitude   Decimal?       @db.Decimal(10, 7)
+  waterTemp   Decimal?       @db.Decimal(5, 1)
+  weather     String?
+  notes       String?        @db.Text
+  released    Boolean        @default(true)
+  visibility  Visibility     @default(PRIVATE)
+  caughtAt    DateTime       @default(now())
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  user   User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  trip   Trip? @relation(fields: [tripId], references: [id], onDelete: SetNull)
+
+  photos CatchPhoto[]
+  gear   CatchGear[]
+
+  @@index([userId])
+  @@index([userId, species])
+  @@index([userId, caughtAt])
+  @@index([tripId])
+}
+
+model CatchPhoto {
+  id        String  @id @default(cuid())
+  catchId   String
+  url       String
+  caption   String?
+  isPrimary Boolean @default(false)
+
+  catch Catch @relation(fields: [catchId], references: [id], onDelete: Cascade)
+
+  @@index([catchId])
+}
+
+model CatchGear {
+  id       String @id @default(cuid())
+  catchId  String
+  gearId   String
+
+  catch Catch    @relation(fields: [catchId], references: [id], onDelete: Cascade)
+  gear  GearItem @relation(fields: [gearId], references: [id], onDelete: Cascade)
+
+  @@unique([catchId, gearId])
+  @@index([catchId])
+  @@index([gearId])
+}

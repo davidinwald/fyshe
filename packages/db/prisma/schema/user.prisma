@@ -15,7 +15,10 @@ model User {
   sessions Session[]
 
   // Domain relations
-  gear GearItem[]
+  gear        GearItem[]
+  catches     Catch[]
+  trips       Trip[]
+  tripMembers TripMember[]
 
   // Preferences
   preferences UserPreferences?

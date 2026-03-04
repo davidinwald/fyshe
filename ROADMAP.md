@@ -37,19 +37,22 @@
 - [ ] Avatar upload with Uploadthing
 
 ## Phase 2: Catch Logging & Trips
-- [ ] Catch model + CatchPhoto + CatchGear (schema migration)
-- [ ] Catch tRPC router (CRUD + stats)
-- [ ] Catch logging form (species, measurements, method, notes)
-- [ ] Photo upload integration (Uploadthing)
-- [ ] Location picker with React Leaflet
-- [ ] Catch detail page (photos, gear, map)
-- [ ] Catch list with filters and sorting
-- [ ] Trip model + TripMember + TripPhoto (schema migration)
-- [ ] Trip tRPC router (CRUD + members)
-- [ ] Trip detail page (map, catches, members, photos)
-- [ ] Link catches to trips and gear
-- [ ] Catch statistics page
-- [ ] Playwright E2E test: log a catch flow
+- [x] Catch model + CatchPhoto + CatchGear (schema migration)
+- [x] Catch tRPC router (CRUD + stats)
+- [x] Catch logging form (species, measurements, method, gear linking, notes)
+- [x] Catch detail page (gear, method, measurements, location)
+- [x] Catch list with filters and sorting
+- [x] Trip model + TripMember + TripPhoto (schema migration)
+- [x] Trip tRPC router (CRUD + members)
+- [x] Trip detail page (catches, members)
+- [x] Trip list with search and date filters
+- [x] Link catches to trips and gear
+- [x] Vitest unit tests for catch + trip validators (48 total)
+- [x] Vitest integration tests for catch + trip routers
+- [x] Photo upload integration (Uploadthing)
+- [x] Location picker with React Leaflet
+- [x] Catch statistics page (dedicated)
+- [x] Playwright E2E test: log a catch flow
 
 ## Phase 3: Fly Fishing Features
 - [ ] FlyPattern + FlyMaterial + FlyTyingStep models

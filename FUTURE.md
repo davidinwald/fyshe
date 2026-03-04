@@ -112,6 +112,20 @@ A peer-to-peer marketplace for fishing gear within the community.
 - Cache recently viewed gear/patterns for offline access
 - Background sync with conflict resolution
 
+## Self-Hosted File Storage
+
+Currently using Uploadthing (SaaS, free tier: 2GB / 2K uploads/mo). If we outgrow it or want full control:
+
+- **Cloudflare R2** — S3-compatible, no egress fees, 10GB free tier. Best cost/simplicity ratio.
+- **MinIO on Railway** — Self-hosted S3-compatible, uses Railway volume mount. Full control but requires management.
+- **Supabase Storage** — S3-backed, generous free tier, easy API. Another SaaS but OSS.
+
+Railway volume mounts are pinned to a single service instance and have no built-in CDN, so they're not ideal for serving user-uploaded images directly. A better Railway approach would be MinIO as a separate service with its own volume, fronted by a CDN (Cloudflare).
+
+The swap would only affect `apps/web/src/lib/uploadthing.ts` and the client helpers — the rest of the app stores URLs in Postgres regardless of storage backend.
+
+---
+
 ## Map Overlays
 
 - Heatmap of catch density
