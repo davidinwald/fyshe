@@ -111,12 +111,12 @@ export function MaterialInventory({ initialItems }: { initialItems: MaterialItem
   }
 
   // Group items by category
-  const grouped = displayItems.reduce<Record<string, MaterialItem[]>>((acc, item) => {
+  const grouped = displayItems.reduce((acc: Record<string, MaterialItem[]>, item: MaterialItem) => {
     const cat = item.category;
     if (!acc[cat]) acc[cat] = [];
     acc[cat].push(item);
     return acc;
-  }, {});
+  }, {} as Record<string, MaterialItem[]>);
 
   const categories = Object.keys(grouped).sort();
 
