@@ -16,19 +16,25 @@
 - [x] Dashboard page (placeholder)
 - [x] CircleCI pipeline
 - [x] CLAUDE.md + ROADMAP.md + README
+- [x] Docker containerization (docker-compose + Dockerfile)
+- [x] System documentation (docs/ARCHITECTURE.md, DATA-MODEL.md, TESTING.md)
+- [x] Claude Code skills (add-router, add-page, add-model, test, verify, docker-up)
 - [ ] Deploy to Vercel + Railway PostgreSQL
 - [ ] Verify OAuth login end-to-end
 
 ## Phase 1: User & Gear
-- [ ] User profile page (edit name, bio, location, avatar)
-- [ ] User preferences page (species, methods, units, visibility)
-- [ ] GearItem model (schema migration)
-- [ ] Gear tRPC router (CRUD)
-- [ ] Gear list page with category/status filters
-- [ ] Gear detail page
-- [ ] Add gear form with validation
-- [ ] Gear status management (owned, wishlist, retired)
-- [ ] Vitest tests for user and gear routers
+- [x] User profile page (edit name, bio, location, avatar)
+- [x] User preferences page (species, methods, units, visibility)
+- [x] GearItem model (schema migration)
+- [x] Gear tRPC router (CRUD)
+- [x] Gear list page with category/status filters
+- [x] Gear detail page
+- [x] Add gear form with validation
+- [x] Gear status management (owned, wishlist, retired)
+- [x] Vitest unit tests for validators (19 tests)
+- [x] Vitest integration tests for user and gear routers (28 tests)
+- [x] Playwright E2E test scaffolding (landing, auth)
+- [ ] Avatar upload with Uploadthing
 
 ## Phase 2: Catch Logging & Trips
 - [ ] Catch model + CatchPhoto + CatchGear (schema migration)

@@ -1,0 +1,14 @@
+node_modules
+.next
+.turbo
+dist
+coverage
+test-results
+playwright-report
+.git
+.env
+.env.local
+.env.*.local
+*.log
+*.md
+!README.md

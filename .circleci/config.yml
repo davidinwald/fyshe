@@ -11,6 +11,20 @@ executors:
     environment:
       TURBO_UI: "false"
 
+  node-postgres:
+    docker:
+      - image: cimg/node:22.12
+      - image: cimg/postgres:16.4
+        environment:
+          POSTGRES_USER: fyshe_test
+          POSTGRES_PASSWORD: fyshe_test
+          POSTGRES_DB: fyshe_test
+    working_directory: ~/fyshe
+    environment:
+      TURBO_UI: "false"
+      DATABASE_URL: postgresql://fyshe_test:fyshe_test@localhost:5432/fyshe_test
+      DATABASE_URL_TEST: postgresql://fyshe_test:fyshe_test@localhost:5432/fyshe_test
+
 jobs:
   install:
     executor: node-executor
@@ -59,7 +73,7 @@ jobs:
           name: Type Check
           command: pnpm typecheck
 
-  test:
+  test-unit:
     executor: node-executor
     steps:
       - attach_workspace:
@@ -68,8 +82,32 @@ jobs:
           name: Enable pnpm
           command: corepack enable && corepack prepare pnpm@10.26.0 --activate
       - run:
-          name: Unit Tests
-          command: pnpm test
+          name: Unit Tests (validators)
+          command: pnpm --filter @fyshe/validators test
+      - store_test_results:
+          path: test-results
+
+  test-integration:
+    executor: node-postgres
+    steps:
+      - attach_workspace:
+          at: ~/fyshe
+      - run:
+          name: Enable pnpm
+          command: corepack enable && corepack prepare pnpm@10.26.0 --activate
+      - run:
+          name: Wait for Postgres
+          command: |
+            for i in $(seq 1 30); do
+              pg_isready -h localhost -U fyshe_test && break
+              sleep 1
+            done
+      - run:
+          name: Generate Prisma Client
+          command: pnpm db:generate
+      - run:
+          name: Integration Tests (API)
+          command: pnpm --filter @fyshe/api test
       - store_test_results:
           path: test-results
 
@@ -97,6 +135,33 @@ jobs:
           name: Check formatting
           command: pnpm format:check
 
+  test-e2e:
+    executor: node-postgres
+    steps:
+      - attach_workspace:
+          at: ~/fyshe
+      - run:
+          name: Enable pnpm
+          command: corepack enable && corepack prepare pnpm@10.26.0 --activate
+      - run:
+          name: Install Playwright browsers
+          command: pnpm --filter @fyshe/web exec playwright install --with-deps chromium
+      - run:
+          name: Generate Prisma Client
+          command: pnpm db:generate
+      - run:
+          name: Push schema to test DB
+          command: pnpm --filter @fyshe/db db:push --force-reset --accept-data-loss
+      - run:
+          name: E2E Tests
+          command: pnpm --filter @fyshe/web test:e2e --project=chromium
+          environment:
+            AUTH_SECRET: test-secret-for-ci-only
+      - store_artifacts:
+          path: apps/web/playwright-report
+      - store_test_results:
+          path: test-results
+
 workflows:
   ci:
     jobs:
@@ -105,9 +170,18 @@ workflows:
           requires: [install]
       - typecheck:
           requires: [install]
-      - test:
+      - test-unit:
+          requires: [install]
+      - test-integration:
           requires: [install]
       - format-check:
           requires: [install]
       - build:
-          requires: [lint, typecheck, test, format-check]
+          requires: [lint, typecheck, test-unit, test-integration, format-check]
+      - test-e2e:
+          requires: [build]
+          filters:
+            branches:
+              only:
+                - main
+                - /release\/.*/

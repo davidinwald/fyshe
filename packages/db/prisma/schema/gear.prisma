@@ -1,0 +1,43 @@
+model GearItem {
+  id            String       @id @default(cuid())
+  userId        String
+  name          String
+  category      GearCategory
+  brand         String?
+  model         String?
+  description   String?      @db.Text
+  imageUrl      String?
+  status        GearStatus   @default(OWNED)
+  rating        Int?
+  notes         String?      @db.Text
+  purchaseDate  DateTime?
+  purchasePrice Decimal?     @db.Decimal(10, 2)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, category])
+  @@index([userId, status])
+}
+
+enum GearCategory {
+  ROD
+  REEL
+  LINE
+  LURE
+  FLY
+  TACKLE
+  CLOTHING
+  ELECTRONICS
+  ACCESSORY
+  OTHER
+}
+
+enum GearStatus {
+  OWNED
+  WISHLIST
+  RETIRED
+  LOST
+}

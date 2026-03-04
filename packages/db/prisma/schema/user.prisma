@@ -14,6 +14,9 @@ model User {
   accounts Account[]
   sessions Session[]
 
+  // Domain relations
+  gear GearItem[]
+
   // Preferences
   preferences UserPreferences?
 

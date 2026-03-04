@@ -115,15 +115,62 @@ Internal packages use the `@fyshe/` namespace:
 pnpm --filter @fyshe/ui dlx shadcn@latest add [component]
 ```
 
+## Docker
+
+```bash
+docker compose up -d          # Start dev + test databases
+docker compose up db-test -d  # Start only the test database
+docker compose down           # Stop all services
+```
+
+- `db` service: Dev PostgreSQL on port 5432 (user: fyshe/fyshe)
+- `db-test` service: Test PostgreSQL on port 5433 (user: fyshe_test/fyshe_test, tmpfs)
+
+## Testing
+
+```bash
+pnpm --filter @fyshe/validators test  # Unit tests (no DB)
+pnpm --filter @fyshe/api test         # Integration tests (needs db-test)
+pnpm --filter @fyshe/web test:e2e     # E2E tests (needs dev server)
+pnpm test                             # All Vitest tests via turbo
+```
+
+See `docs/TESTING.md` for the full testing guide.
+
 ## Environment Variables
 
 See `.env.example` for all required variables. Key ones:
 
-- `DATABASE_URL` — PostgreSQL connection string
+- `DATABASE_URL` — PostgreSQL connection string (dev: `postgresql://fyshe:fyshe@localhost:5432/fyshe`)
+- `DATABASE_URL_TEST` — Test DB connection (default: `postgresql://fyshe_test:fyshe_test@localhost:5433/fyshe_test`)
 - `AUTH_SECRET` — Auth.js secret (`openssl rand -hex 32`)
 - `AUTH_GITHUB_ID` / `AUTH_GITHUB_SECRET` — GitHub OAuth
 - `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` — Google OAuth
 - `UPLOADTHING_TOKEN` — Uploadthing API token
+
+## System Documentation
+
+| Document | Purpose |
+|----------|---------|
+| `CLAUDE.md` | Agent instructions (this file) |
+| `docs/ARCHITECTURE.md` | System architecture, package graph, data flow, key decisions |
+| `docs/DATA-MODEL.md` | All database models, enums, and relations |
+| `docs/TESTING.md` | Testing strategy, how to write and run tests |
+| `ROADMAP.md` | Phase-based feature progress tracker |
+| `FUTURE.md` | Ideas and future features not yet scheduled |
+
+**Start here when picking up the project.** Read this file first, then `docs/ARCHITECTURE.md` for deeper context.
+
+## Claude Code Skills
+
+| Skill | Description |
+|-------|-------------|
+| `/add-router [domain]` | Scaffold a new tRPC router end-to-end |
+| `/add-page [feature]` | Scaffold a new page with components |
+| `/add-model [name]` | Add a new Prisma model with validators |
+| `/test` | Run the test suite with guidance |
+| `/verify` | Run full verification (typecheck, lint, test, build) |
+| `/docker-up` | Start Docker dev environment |
 
 ## Roadmap
 
