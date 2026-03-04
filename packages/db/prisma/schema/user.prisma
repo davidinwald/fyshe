@@ -23,6 +23,19 @@ model User {
   // Preferences
   preferences UserPreferences?
 
+  // Fly fishing
+  flyPatterns       FlyPattern[]
+  materialInventory MaterialInventory[]
+
+  // Social
+  followers Follow[]  @relation("following")
+  following Follow[]  @relation("followers")
+  likes     Like[]
+  comments  Comment[]
+
+  // Content
+  articles Article[]
+
   @@index([email])
 }
 

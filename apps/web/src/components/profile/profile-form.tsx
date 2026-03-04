@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button, Input, Label, Textarea, Card, CardContent, CardHeader, CardTitle } from "@fyshe/ui";
 import { trpc } from "@/trpc/client";
+import { AvatarUpload } from "@/components/ui/avatar-upload";
 
 interface ProfileFormProps {
   user: {
@@ -20,6 +21,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
   const [name, setName] = useState(user.name ?? "");
   const [bio, setBio] = useState(user.bio ?? "");
   const [location, setLocation] = useState(user.location ?? "");
+  const [image, setImage] = useState(user.image);
   const [isPublic, setIsPublic] = useState(user.isPublic);
 
   const utils = trpc.useUtils();
@@ -29,9 +31,14 @@ export function ProfileForm({ user }: ProfileFormProps) {
     },
   });
 
+  function handleAvatarChange(url: string) {
+    setImage(url);
+    updateProfile.mutate({ image: url });
+  }
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    updateProfile.mutate({ name, bio, location, isPublic });
+    updateProfile.mutate({ name, bio, location, image, isPublic });
   }
 
   return (
@@ -41,6 +48,14 @@ export function ProfileForm({ user }: ProfileFormProps) {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label>Avatar</Label>
+            <AvatarUpload
+              currentImage={image}
+              onAvatarChange={handleAvatarChange}
+            />
+          </div>
+
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" value={user.email ?? ""} disabled />

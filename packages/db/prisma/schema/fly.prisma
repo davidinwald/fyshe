@@ -1,0 +1,142 @@
+model FlyPattern {
+  id             String          @id @default(cuid())
+  createdById    String?
+  name           String
+  description    String?         @db.Text
+  category       FlyCategory
+  type           FlyType?
+  imageUrl       String?
+  hookSize       String?
+  hookType       String?
+  threadColor    String?
+  difficulty     FlyDifficulty   @default(INTERMEDIATE)
+  seasons        Season[]
+  waterTypes     WaterType[]
+  targetSpecies  String[]
+  regions        String[]
+  isPublic       Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  createdBy  User?          @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  materials  FlyMaterial[]
+  tyingSteps FlyTyingStep[]
+
+  @@index([createdById])
+  @@index([category])
+  @@index([name])
+}
+
+model FlyMaterial {
+  id        String @id @default(cuid())
+  patternId String
+  part      String
+  material  String
+  color     String?
+  quantity  String?
+  sortOrder Int    @default(0)
+
+  pattern FlyPattern @relation(fields: [patternId], references: [id], onDelete: Cascade)
+
+  @@index([patternId])
+}
+
+model FlyTyingStep {
+  id          String  @id @default(cuid())
+  patternId   String
+  stepNumber  Int
+  instruction String  @db.Text
+  imageUrl    String?
+  tip         String?
+
+  pattern FlyPattern @relation(fields: [patternId], references: [id], onDelete: Cascade)
+
+  @@index([patternId])
+}
+
+model MaterialInventory {
+  id       String  @id @default(cuid())
+  userId   String
+  category String
+  name     String
+  color    String?
+  brand    String?
+  quantity String?
+  inStock  Boolean @default(true)
+  notes    String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, category])
+}
+
+model BaitType {
+  id            String     @id @default(cuid())
+  name          String
+  description   String?    @db.Text
+  category      BaitCategory
+  isLive        Boolean    @default(false)
+  seasons       Season[]
+  waterTypes    WaterType[]
+  targetSpecies String[]
+  regions       String[]
+  imageUrl      String?
+  tips          String?    @db.Text
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@index([category])
+  @@index([name])
+}
+
+enum FlyCategory {
+  DRY_FLY
+  NYMPH
+  STREAMER
+  WET_FLY
+  EMERGER
+  TERRESTRIAL
+  MIDGE
+  SALMON_FLY
+  BASS_BUG
+  SALTWATER
+}
+
+enum FlyType {
+  ATTRACTOR
+  IMITATOR
+  SEARCHING
+}
+
+enum FlyDifficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum BaitCategory {
+  LIVE_BAIT
+  CUT_BAIT
+  ARTIFICIAL_BAIT
+  DOUGH_BAIT
+  PREPARED_BAIT
+}
+
+enum Season {
+  SPRING
+  SUMMER
+  FALL
+  WINTER
+}
+
+enum WaterType {
+  RIVER
+  STREAM
+  LAKE
+  POND
+  RESERVOIR
+  SALTWATER
+  BRACKISH
+}

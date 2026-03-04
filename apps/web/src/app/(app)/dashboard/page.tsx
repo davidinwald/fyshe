@@ -1,4 +1,5 @@
 import { createCaller } from "@/trpc/server";
+import { ActivityFeed } from "@/components/feed/activity-feed";
 
 export default async function DashboardPage() {
   const trpc = await createCaller();
@@ -18,10 +19,19 @@ export default async function DashboardPage() {
         <DashboardCard title="Flies" value="--" description="Patterns saved" />
       </div>
 
-      <div className="rounded-lg border border-border p-4">
-        <p className="text-sm text-muted-foreground">
-          API Status: <span className="font-mono text-foreground">{health.status}</span>
-        </p>
+      <div className="grid gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2 space-y-4">
+          <h2 className="text-xl font-semibold">Activity Feed</h2>
+          <ActivityFeed />
+        </div>
+
+        <div className="space-y-4">
+          <div className="rounded-lg border border-border p-4">
+            <p className="text-sm text-muted-foreground">
+              API Status: <span className="font-mono text-foreground">{health.status}</span>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

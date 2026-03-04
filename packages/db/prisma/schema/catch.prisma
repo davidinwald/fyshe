@@ -21,8 +21,10 @@ model Catch {
   user   User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   trip   Trip? @relation(fields: [tripId], references: [id], onDelete: SetNull)
 
-  photos CatchPhoto[]
-  gear   CatchGear[]
+  photos   CatchPhoto[]
+  gear     CatchGear[]
+  likes    Like[]
+  comments Comment[]
 
   @@index([userId])
   @@index([userId, species])

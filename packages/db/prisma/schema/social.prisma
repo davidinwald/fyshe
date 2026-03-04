@@ -1,0 +1,60 @@
+model Follow {
+  id          String   @id @default(cuid())
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+
+  follower  User @relation("followers", fields: [followerId], references: [id], onDelete: Cascade)
+  following User @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  catchId   String?
+  tripId    String?
+  articleId String?
+  createdAt DateTime @default(now())
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  catch   Catch?   @relation(fields: [catchId], references: [id], onDelete: Cascade)
+  trip    Trip?    @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  article Article? @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, catchId])
+  @@unique([userId, tripId])
+  @@unique([userId, articleId])
+  @@index([userId])
+  @@index([catchId])
+  @@index([tripId])
+  @@index([articleId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  userId    String
+  catchId   String?
+  tripId    String?
+  articleId String?
+  parentId  String?
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  catch   Catch?    @relation(fields: [catchId], references: [id], onDelete: Cascade)
+  trip    Trip?     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  article Article?  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies Comment[] @relation("CommentReplies")
+
+  @@index([userId])
+  @@index([catchId])
+  @@index([tripId])
+  @@index([articleId])
+  @@index([parentId])
+}

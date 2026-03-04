@@ -14,6 +14,7 @@
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
     "db:seed": "tsx prisma/seed.ts",
+    "db:seed-flies": "tsx ../../tooling/scripts/seed-fly-data.ts",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf dist node_modules/.prisma"
   },

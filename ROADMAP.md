@@ -34,7 +34,7 @@
 - [x] Vitest unit tests for validators (19 tests)
 - [x] Vitest integration tests for user and gear routers (28 tests)
 - [x] Playwright E2E test scaffolding (landing, auth)
-- [ ] Avatar upload with Uploadthing
+- [x] Avatar upload with Uploadthing
 
 ## Phase 2: Catch Logging & Trips
 - [x] Catch model + CatchPhoto + CatchGear (schema migration)
@@ -55,38 +55,41 @@
 - [x] Playwright E2E test: log a catch flow
 
 ## Phase 3: Fly Fishing Features
-- [ ] FlyPattern + FlyMaterial + FlyTyingStep models
-- [ ] Seed 50-100 well-known fly patterns
-- [ ] Fly pattern library page (browse, search, filter)
-- [ ] Fly pattern detail page (materials, tying steps)
-- [ ] Recommendation engine (rule-based)
-- [ ] Recommendation UI
-- [ ] MaterialInventory model and CRUD
-- [ ] Material inventory page
-- [ ] BaitType model and seed data
-- [ ] Bait recommendations
-- [ ] User-created fly patterns
+- [x] FlyPattern + FlyMaterial + FlyTyingStep models
+- [x] Seed 50-100 well-known fly patterns (60 patterns + 22 bait types)
+- [x] Fly pattern library page (browse, search, filter)
+- [x] Fly pattern detail page (materials, tying steps)
+- [x] Recommendation engine (rule-based scoring)
+- [x] Recommendation UI
+- [x] MaterialInventory model and CRUD
+- [x] Material inventory page
+- [x] BaitType model and seed data
+- [x] Bait recommendations
+- [x] User-created fly patterns (create/edit/delete)
+- [x] Fly + bait validator tests (36 tests, 84 total)
 
 ## Phase 4: Content & Social
-- [ ] MDX content pipeline (load from content/ directory)
-- [ ] Article listing and detail pages
-- [ ] Article model for user-generated content
-- [ ] Follow system (follow/unfollow)
-- [ ] Public profile pages at /angler/[username]
-- [ ] Visibility controls on catches and trips
-- [ ] Activity feed
-- [ ] Like system
-- [ ] Comment system with threaded replies
-- [ ] OG metadata for social sharing
-- [ ] Explore page (public catches feed)
+- [x] MDX content pipeline (load from content/ directory)
+- [x] Article listing and detail pages
+- [x] Article model for user-generated content (CRUD + slug generation)
+- [x] Follow system (follow/unfollow/isFollowing)
+- [x] Public profile pages at /angler/[id]
+- [x] Visibility controls on catches and trips (existing from Phase 2)
+- [x] Activity feed (followed users' catches + trips)
+- [x] Like system (toggle, counts, polymorphic)
+- [x] Comment system with threaded replies
+- [x] OG metadata for social sharing (angler + article pages)
+- [x] Explore page (public catches feed with cursor pagination)
+- [x] Social + content validator tests (34 tests, 118 total)
+- [x] Sample editorial content (4 MDX articles)
 
 ## Phase 5: PWA & Polish
-- [ ] Serwist integration (service worker, caching)
-- [ ] PWA manifest and icons
-- [ ] Install prompt UI
-- [ ] Offline fallback page
+- [x] Serwist integration (service worker, caching, navigation preload)
+- [x] PWA manifest and icons (192px, 512px, maskable)
+- [x] Install prompt UI (deferred prompt banner)
+- [x] Offline fallback page (/offline)
 - [ ] Performance audit (Lighthouse)
 - [ ] Accessibility audit
-- [ ] Loading states and skeleton screens
-- [ ] Error boundaries on all route segments
+- [x] Loading states and skeleton screens (catches, gear, trips, flies)
+- [x] Error boundaries on all route segments (app + public)
 - [ ] README with screenshots and demo link

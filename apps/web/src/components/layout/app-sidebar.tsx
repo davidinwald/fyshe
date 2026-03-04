@@ -16,7 +16,9 @@ const navItems = [
   { href: "/catches", label: "Catches", icon: "fish" },
   { href: "/trips", label: "Trips", icon: "map" },
   { href: "/gear", label: "Gear", icon: "backpack" },
-  { href: "/flies", label: "Flies", icon: "bug" },
+  { href: "/flies", label: "Flies & Bait", icon: "bug" },
+  { href: "/articles/my", label: "Articles", icon: "file-text" },
+  { href: "/explore", label: "Explore", icon: "compass" },
 ];
 
 export function AppSidebar({ user: _user }: AppSidebarProps) {
