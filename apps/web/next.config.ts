@@ -14,6 +14,9 @@ const withSerwist = withSerwistInit({
 const nextConfig: NextConfig = {
   output: process.env.VERCEL ? "standalone" : undefined,
   outputFileTracingRoot: path.join(__dirname, "../../"),
+  outputFileTracingIncludes: {
+    "/*": ["../../packages/db/src/generated/**/*"],
+  },
   transpilePackages: ["@fyshe/api", "@fyshe/auth", "@fyshe/db", "@fyshe/ui", "@fyshe/validators"],
 };
 
