@@ -33,6 +33,7 @@ playwright-report/
 
 # Prisma
 packages/db/prisma/migrations/migration_lock.toml
+packages/db/src/generated/
 
 # PWA
 public/sw.js
